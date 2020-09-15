@@ -1,2 +1,8 @@
 .vscode
 *.code-workspace
+
+obj/*
+!obj/README.md
+
+bin/*
+!bin/README.md
