@@ -5,32 +5,31 @@
 #include <memory>
 
 namespace LinearAlgebra {
-  template <size_t width, size_t height>
+  template <size_t W, size_t H>
+  using TwoDArray = std::array<std::array<float, W>, H>;
+  
+  template <size_t W, size_t H>
   class Matrix {
     public:
       Matrix() = delete;
-      Matrix(const std::array<std::array<float, height>, width>& matrix);
-      Matrix(const Matrix& other);
+      Matrix(const TwoDArray<W, H> &matrix);
+      Matrix(const Matrix &other);
 
-      void multiply(const Matrix& other);
+      void multiply(const Matrix &other);
 
     private:
-      std::array<std::array<float, height>, width> rows;
+      std::shared_ptr<TwoDArray<W, H> matrix;
   };
 
-  template<size_t width, size_t height>
-  std::shared_ptr<Matrix<width, height>> createIdentityMatrix();
+  std::shared_ptr<Matrix<W, H>> createIdentityMatrix();
 
-  template<size_t width, size_t height>
-  std::shared_ptr<Matrix<width, height>> createTranslationMatrix(
+  std::shared_ptr<Matrix<W, H>> createTranslationMatrix(
       float xTranslation, float yTranslation, float zTranslation);
 
-  template<size_t width, size_t height>
-  std::shared_ptr<Matrix<width, height>> createRotationMatrix(
+  std::shared_ptr<Matrix<W, H>> createRotationMatrix(
       float xRotation, float yRotation, float zRotation);
 
-  template<size_t width, size_t height>
-  std::shared_ptr<Matrix<width, height>> createScaleMatrix(
+  std::shared_ptr<Matrix<W, H>> createScaleMatrix(
       float xScale, float yScale, float zScale);
 }
 

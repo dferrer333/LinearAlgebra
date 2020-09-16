@@ -5,7 +5,9 @@
 int main() {
   std::cout << "Implement Matrix Test!!";
 
-  // TODO
+  LinearAlgebra::Matrix<5, 5> myMatrix();
+
+  std::cout << &myMatrix << std::endl;
 
   return 0;
 }
