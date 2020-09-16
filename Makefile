@@ -14,8 +14,17 @@ _OBJ = Matrix.o MatrixFactories.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
-test_matrix: $(OBJ) $(TESTDIR)/Matrix.test.o
+test_matrix: $(BDIR)/test_matrix
+$(BDIR)/test_matrix: $(OBJ) $(ODIR)/Matrix.test.o
 	$(CXX) -o $@ $^ $(CXXFLAGS)
+
+$(ODIR)/%.test.o: $(TESTDIR)/%.test.cpp $(DEPS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
+
+.PHONY: clean
+
+clean:
+	rm $(ODIR)/*.o $(BDIR)/*.exe

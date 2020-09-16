@@ -19,7 +19,7 @@ bool simple_matrix_construction() {
     LA::OneDArray row2 = {3, 4};
     LA::TwoDArray matrix = {row1, row2};
 
-    LinearAlgebra::Matrix myMatrix(matrix);
+    LA::Matrix myMatrix(matrix);
   } catch (std::exception &error) {
     return false;
   }
