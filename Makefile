@@ -17,5 +17,5 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 test_matrix: $(OBJ) $(TESTDIR)/Matrix.test.o
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
-$(ODIR)/%.o: $(SRCDIR)%.cpp $(DEPS)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+$(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
