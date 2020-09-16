@@ -1,5 +1,5 @@
 #include <iostream>
-#include "LinearAlgebra.h"
+#include "Matrix.h"
 
 int main() {
   std::cout << "Implement Matrix Scale Test!!";

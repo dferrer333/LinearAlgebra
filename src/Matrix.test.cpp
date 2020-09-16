@@ -1,8 +1,9 @@
+#include <array>
 #include <iostream>
 #include "Matrix.h"
 
 int main() {
-  std::cout << "Implement Matrix Rotation Test!!";
+  std::cout << "Implement Matrix Test!!";
 
   // TODO
 
