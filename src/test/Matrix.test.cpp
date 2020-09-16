@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Matrix.h"
 
+namespace LA = LinearAlgebra;
+
 bool simple_matrix_construction();
 
 int main() {
@@ -13,11 +15,11 @@ int main() {
 
 bool simple_matrix_construction() {
   try {
-    std::array<float, 2> row1 = {1, 2};
-    std::array<float, 2> row2 = {3, 4};
-    std::array<std::array<float, 2>, 2> matrix = {row1, row2};
+    LA::OneDArray row1 = {1, 2};
+    LA::OneDArray row2 = {3, 4};
+    LA::TwoDArray matrix = {row1, row2};
 
-    LinearAlgebra::Matrix<2, 2> myMatrix(matrix);
+    LinearAlgebra::Matrix myMatrix(matrix);
   } catch (std::exception &error) {
     return false;
   }

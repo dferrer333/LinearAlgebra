@@ -1,11 +1,10 @@
-#include <array>
 #include "Matrix.h"
+#include <vector>
 
-template <size_t W, size_t H>
-LinearAlgebra::MatrixPointer<W, H> LinearAlgebra::createIdentityMatrix(
+LinearAlgebra::MatrixPointer LinearAlgebra::createIdentityMatrix(
     size_t matrixSize) {
-  LinearAlgebra::TwoDArray<matrixSize, matrixSize> identityMatrix();
-  std::array<float, matrixSize> row;
+  LinearAlgebra::TwoDArray identityMatrix(matrixSize);
+  std::vector<float> row(matrixSize);
   for (size_t i = 0; i < matrixSize; i++) {
     for (size_t j = 0; j < matrixSize; j++) {
       if (i == j) {
@@ -18,6 +17,5 @@ LinearAlgebra::MatrixPointer<W, H> LinearAlgebra::createIdentityMatrix(
     identityMatrix[i] = row;
   }
 
-  return std::make_shared<LinearAlgebra::Matrix<matrixSize, matrixSize>>(
-      identityMatrix);
+  return std::make_shared<LinearAlgebra::Matrix>(identityMatrix);
 }
