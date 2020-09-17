@@ -7,6 +7,7 @@
 namespace LinearAlgebra {
   using OneDArray = std::vector<float>;
   using TwoDArray = std::vector<std::vector<float>>;
+  using MatrixPointer = std::unique_ptr<Matrix>;
 
   class Matrix {
     public:
@@ -14,7 +15,15 @@ namespace LinearAlgebra {
       Matrix(const TwoDArray &matrix);
       Matrix(const Matrix &other);
 
-      void multiply(const Matrix &other);
+      MatrixPointer multiplyAndCopy(MatrixPointer const &other) const;
+      MatrixPointer divideAndCopy(MatrixPointer const &other) const;
+      MatrixPointer addAndCopy(MatrixPointer const &other) const;
+      MatrixPointer subtractAndCopy(MatrixPointer const &other) const;
+
+      MatrixPointer& operator*(MatrixPointer const &other);
+      MatrixPointer& operator/(MatrixPointer const &other);
+      MatrixPointer& operator+(MatrixPointer const &other);
+      MatrixPointer& operator-(MatrixPointer const &other);
 
     private:
       TwoDArray matrix;
@@ -22,8 +31,6 @@ namespace LinearAlgebra {
       void ensureMatrixHasRowsAndColumns();
       void ensureMatrixIsUniform();
   };
-
-  using MatrixPointer = std::unique_ptr<Matrix>;;
 
   MatrixPointer createIdentityMatrix(size_t size);
 
