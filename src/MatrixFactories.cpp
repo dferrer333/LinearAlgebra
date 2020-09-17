@@ -1,5 +1,4 @@
 #include "Matrix.h"
-#include <vector>
 
 LinearAlgebra::MatrixPointer LinearAlgebra::createIdentityMatrix(
     size_t matrixSize) {
@@ -8,7 +7,7 @@ LinearAlgebra::MatrixPointer LinearAlgebra::createIdentityMatrix(
   }
 
   LinearAlgebra::TwoDArray identityMatrix(matrixSize);
-  std::vector<float> row(matrixSize);
+  LinearAlgebra::OneDArray row(matrixSize);
 
   for (size_t i = 0; i < matrixSize; i++) {
     for (size_t j = 0; j < matrixSize; j++) {
@@ -22,5 +21,5 @@ LinearAlgebra::MatrixPointer LinearAlgebra::createIdentityMatrix(
     identityMatrix[i] = row;
   }
 
-  return std::make_shared<LinearAlgebra::Matrix>(identityMatrix);
+  return std::make_unique<LinearAlgebra::Matrix>(identityMatrix);
 }

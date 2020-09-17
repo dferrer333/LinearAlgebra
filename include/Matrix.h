@@ -20,7 +20,7 @@ namespace LinearAlgebra {
       TwoDArray matrix;
   };
 
-  using MatrixPointer = std::shared_ptr<Matrix>;
+  using MatrixPointer = std::unique_ptr<Matrix>;;
 
   MatrixPointer createIdentityMatrix(size_t size);
 
