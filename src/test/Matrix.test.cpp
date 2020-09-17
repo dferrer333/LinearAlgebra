@@ -5,27 +5,12 @@
 
 namespace LA = LinearAlgebra;
 
-bool test_default_matrix_constructor();
 bool test_2D_array_matrix_constructor();
 
 int main() {
-  assert(
-      test_default_matrix_constructor() &&
-      test_2D_array_matrix_constructor());
+  assert(test_2D_array_matrix_constructor());
 
   return 0;
-}
-
-
-bool test_default_matrix_constructor() {
-  try {
-    LA::Matrix myMatrix();
-  } catch (...) {
-    std::cout << "[SUCCESS] - " << __FUNCTION__ << '\n';
-    return true;
-  }
-  std::cerr << "[FAILURE] - " << __FUNCTION__ << '\n';
-  return false;
 }
 
 bool test_non_uniform_2D_array();
@@ -94,10 +79,10 @@ bool test_normal_2D_array_constructor() {
   try {
     LA::Matrix matrix(rows);
   } catch (...) {
-    std::cerr << "[FAILURE] - " __FUNCTION__ << '\n';
+    std::cerr << "[FAILURE] - " << __FUNCTION__ << '\n';
     return false;
   }
 
-  std::cout << "[SUCCESS] - " __FUNCTION__ << '\n';
+  std::cout << "[SUCCESS] - " << __FUNCTION__ << '\n';
   return true;
 }

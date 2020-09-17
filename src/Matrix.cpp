@@ -3,14 +3,14 @@
 
 LinearAlgebra::Matrix::Matrix(const LinearAlgebra::TwoDArray &matrix)
     : matrix(matrix) {
-  void ensureMatrixHasRowsAndColumns();
-  void ensureMatrixIsUniform();
+  this->ensureMatrixHasRowsAndColumns();
+  this->ensureMatrixIsUniform();
 }
 
 LinearAlgebra::Matrix::Matrix(const LinearAlgebra::Matrix &otherMatrix)
     : matrix(otherMatrix.matrix) {
-  void ensureMatrixHasRowsAndColumns();
-  void ensureMatrixIsUniform();
+  this->ensureMatrixHasRowsAndColumns();
+  this->ensureMatrixIsUniform();
 }
 
 void LinearAlgebra::Matrix::multiply(
