@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 IDIR=include
 CXX=g++
 CXXFLAGS=-I$(IDIR) -Wall -Werror
@@ -33,4 +35,4 @@ $(ODIR)/%.o: $(SRCDIR)/%.cpp $(DEPS)
 .PHONY: clean
 
 clean:
-	rm $(ODIR)/*.o $(BDIR)/*.exe
+	find ./$(ODIR) ./$(BDIR) -type f ! -name README.md | xargs rm
