@@ -18,6 +18,9 @@ namespace LinearAlgebra {
 
     private:
       TwoDArray matrix;
+
+      void ensureMatrixHasRowsAndColumns();
+      void ensureMatrixIsUniform();
   };
 
   using MatrixPointer = std::unique_ptr<Matrix>;;
