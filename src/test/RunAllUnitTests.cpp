@@ -1,4 +1,4 @@
-#include "Matrix/AllTests.cpp";
+#include "Matrix/AllTests.cpp"
 
 int main() {
   Test::Matrix::run_all_tests();
