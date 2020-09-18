@@ -1,5 +1,5 @@
-#include "Matrix.h";
-#include "../TestLogger.cpp";
+#include "Matrix.h"
+#include "../TestLogger.cpp"
 
 namespace Test {
   namespace Matrix {
