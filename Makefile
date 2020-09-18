@@ -15,16 +15,7 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = Matrix.o MatrixFactories.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-
-test_all: test_matrix test_identity
-
-test_matrix: $(BDIR)/test_matrix
-$(BDIR)/test_matrix: $(OBJ) $(ODIR)/Matrix.test.o
-	$(CXX) -o $@ $^ $(CXXFLAGS)
-
-test_identity: $(BDIR)/test_identity
-$(BDIR)/test_identity: $(OBJ) $(ODIR)/MatrixIdentity.test.o
-	$(CXX) -o $@ $^ $(CXXFLAGS)
+include makefiles/*.mk
 
 $(ODIR)/%.test.o: $(TESTDIR)/%.test.cpp $(DEPS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
