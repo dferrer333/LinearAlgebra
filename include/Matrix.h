@@ -12,19 +12,22 @@ namespace LinearAlgebra {
   class Matrix {
     public:
       Matrix() = delete;
-      Matrix(const TwoDArray &matrix);
-      Matrix(const Matrix &other);
-      Matrix(const MatrixPointer &otherPointer);
+      Matrix(TwoDArray const &matrix);
+      Matrix(Matrix const &other);
+      Matrix(MatrixPointer const &otherPointer);
 
-      MatrixPointer multiplyAndCopy(MatrixPointer const &other) const;
-      MatrixPointer divideAndCopy(MatrixPointer const &other) const;
-      MatrixPointer addAndCopy(MatrixPointer const &other) const;
-      MatrixPointer subtractAndCopy(MatrixPointer const &other) const;
+      int getWidth();
+      int getHeight();
 
-      MatrixPointer& operator*(MatrixPointer const &other);
-      MatrixPointer& operator/(MatrixPointer const &other);
-      MatrixPointer& operator+(MatrixPointer const &other);
-      MatrixPointer& operator-(MatrixPointer const &other);
+      Matrix multiplyAndCopy(Matrix const &other) const;
+      Matrix divideAndCopy(Matrix const &other) const;
+      Matrix addAndCopy(Matrix const &other) const;
+      Matrix subtractAndCopy(Matrix const &other) const;
+
+      Matrix& operator*(Matrix const &other);
+      Matrix& operator/(Matrix const &other);
+      Matrix& operator+(Matrix const &other);
+      Matrix& operator-(Matrix const &other);
 
     private:
       TwoDArray matrix;

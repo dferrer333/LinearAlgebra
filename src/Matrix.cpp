@@ -1,20 +1,27 @@
 #include <iostream>
 #include "Matrix.h"
 
-LinearAlgebra::Matrix::Matrix(const LinearAlgebra::TwoDArray &matrix)
+LinearAlgebra::Matrix::Matrix(LinearAlgebra::TwoDArray const &matrix)
     : matrix(matrix) {
   this->ensureMatrixHasRowsAndColumns();
   this->ensureMatrixIsUniform();
 }
 
-LinearAlgebra::Matrix::Matrix(const LinearAlgebra::Matrix &otherMatrix)
+LinearAlgebra::Matrix::Matrix(LinearAlgebra::Matrix const &otherMatrix)
     : matrix(otherMatrix.matrix) {
   this->ensureMatrixHasRowsAndColumns();
   this->ensureMatrixIsUniform();
 }
 
+LinearAlgebra::Matrix::Matrix(
+    LinearAlgebra::MatrixPointer const &otherMatrixPointer)
+        : matrix(otherMatrixPointer->matrix) {
+  this->ensureMatrixHasRowsAndColumns();
+  this->ensureMatrixIsUniform();
+}
+
 void LinearAlgebra::Matrix::multiply(
-    const LinearAlgebra::Matrix &otherMatrix) {
+    LinearAlgebra::Matrix const &otherMatrix) {
   std::cerr << "LinearAlgebra::Matrix::multiply Not Implemented!\n";
 }
 
