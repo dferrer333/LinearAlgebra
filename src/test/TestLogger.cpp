@@ -6,28 +6,28 @@ namespace Test {
     void print_success(
         std::string fileName,
         std::string functionName,
-        std::string lineNumber);
+        int lineNumber);
     void print_failure(
         std::string fileName,
         std::string functionName,
-        std::string lineNumber);
+        int lineNumber);
     void print_message(
         std::ostream &outputStream,
         std::string testTag,
         std::string &functionName,
         std::string &fileName,
-        std::string &lineNumber);
+        int lineNumber);
   }
 }
 
 void Test::Logger::print_success(
-    std::string functionName, std::string fileName, std::string lineNumber) {
+    std::string functionName, std::string fileName, int lineNumber) {
   Test::Logger::print_message(
       std::cerr, "[SUCCESS]", functionName, fileName, lineNumber);
 }
 
 void Test::Logger::print_failure(
-    std::string functionName, std::string fileName, std::string lineNumber) {
+    std::string functionName, std::string fileName, int lineNumber) {
   Test::Logger::print_message(
       std::cout, "[FAILURE]", functionName, fileName, lineNumber);
 }
@@ -37,7 +37,7 @@ void Test::Logger::print_message(
     std::string testTag,
     std::string &functionName,
     std::string &fileName,
-    std::string &lineNumber) {
+    int lineNumber) {
   outputStream << testTag << " - FUNCTION: " << functionName << "; FILE: ";
   outputStream << fileName << "; LINE: " << lineNumber << ";\n";
 }
