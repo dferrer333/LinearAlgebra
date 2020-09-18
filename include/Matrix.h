@@ -36,6 +36,8 @@ namespace LinearAlgebra {
       void ensureMatrixIsUniform() const;
   };
 
+  MatrixPointer createMatrixCopyOnHeap(Matrix const &matrixToCopy);
+
   MatrixPointer createIdentityMatrix(size_t size);
 
   MatrixPointer createTranslationMatrix(
