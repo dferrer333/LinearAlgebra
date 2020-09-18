@@ -7,17 +7,15 @@
 namespace LinearAlgebra {
   using OneDArray = std::vector<float>;
   using TwoDArray = std::vector<std::vector<float>>;
-  using MatrixPointer = std::unique_ptr<Matrix>;
 
   class Matrix {
     public:
       Matrix() = delete;
       Matrix(TwoDArray const &rows);
       Matrix(Matrix const &otherMatrix);
-      Matrix(MatrixPointer const &otherMatrixPointer);
 
-      int getWidth();
-      int getHeight();
+      int getWidth() const;
+      int getHeight() const;
 
       Matrix multiplyAndCopy(Matrix const &otherMatrix) const;
       Matrix divideAndCopy(Matrix const &otherMatrix) const;
@@ -31,12 +29,12 @@ namespace LinearAlgebra {
 
     private:
       TwoDArray rows;
-      int matrixWidth;
-      int matrixHeight;
 
       void ensureMatrixHasRowsAndColumns() const;
       void ensureMatrixIsUniform() const;
   };
+
+  using MatrixPointer = std::unique_ptr<Matrix>;
 
   MatrixPointer createMatrixCopyOnHeap(Matrix const &otherMatrix);
 

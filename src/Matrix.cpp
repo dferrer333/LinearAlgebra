@@ -5,35 +5,29 @@ LinearAlgebra::Matrix::Matrix(LinearAlgebra::TwoDArray const &rows)
     : rows(rows) {
   this->ensureMatrixHasRowsAndColumns();
   this->ensureMatrixIsUniform();
-
-  this->matrixWidth(rows.size());
-  this->matrixHeight(rows[0].size());
 }
 
 LinearAlgebra::Matrix::Matrix(LinearAlgebra::Matrix const &otherMatrix)
-    : rows(otherMatrix.rows),
-      matrixWidth(otherMatrix.getWidth()),
-      matrixHeight(otherMatrix.getHeight()) {
+    : rows(otherMatrix.rows) {
   this->ensureMatrixHasRowsAndColumns();
   this->ensureMatrixIsUniform();
 }
 
-LinearAlgebra::Matrix::Matrix(
-    LinearAlgebra::MatrixPointer const &otherMatrixPointer)
-        : rows(otherMatrixPointer->rows),
-          matrixWidth(otherMatrixPointer->rows.getWidth()),
-          matrixHeight(otherMatrixPointer->rows.getHeight()) {
-  this->ensureMatrixHasRowsAndColumns();
-  this->ensureMatrixIsUniform();
+int LinearAlgebra::Matrix::getWidth() const {
+  return this->rows.size();
 }
 
-void LinearAlgebra::Matrix::ensureMatrixHasRowsAndColumns() {
+int LinearAlgebra::Matrix::getHeight() const {
+  return this->rows[0].size();
+}
+
+void LinearAlgebra::Matrix::ensureMatrixHasRowsAndColumns() const {
   if (this->rows.size() == 0 || this->rows[0].size() == 0) {
     throw "Error: matrix must have both rows and columns.";
   }
 }
 
-void LinearAlgebra::Matrix::ensureMatrixIsUniform() {
+void LinearAlgebra::Matrix::ensureMatrixIsUniform() const {
   size_t rowWidth = this->rows[0].size();
 
   for (auto row : this->rows) {
