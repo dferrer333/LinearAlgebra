@@ -1,4 +1,4 @@
-
+#include "../TestLogger.cpp";
 
 namespace Test {
   namespace Matrix {
