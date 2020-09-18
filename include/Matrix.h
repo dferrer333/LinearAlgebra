@@ -14,6 +14,7 @@ namespace LinearAlgebra {
       Matrix() = delete;
       Matrix(const TwoDArray &matrix);
       Matrix(const Matrix &other);
+      Matrix(const MatrixPointer &otherPointer);
 
       MatrixPointer multiplyAndCopy(MatrixPointer const &other) const;
       MatrixPointer divideAndCopy(MatrixPointer const &other) const;
@@ -28,8 +29,8 @@ namespace LinearAlgebra {
     private:
       TwoDArray matrix;
 
-      void ensureMatrixHasRowsAndColumns();
-      void ensureMatrixIsUniform();
+      void ensureMatrixHasRowsAndColumns() const;
+      void ensureMatrixIsUniform() const;
   };
 
   MatrixPointer createIdentityMatrix(size_t size);
