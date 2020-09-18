@@ -3,7 +3,7 @@
 namespace Test {
   namespace Matrix {
     namespace Subtract {
-      void run_all_tests();
+      bool run_all_tests();
 
       
     }

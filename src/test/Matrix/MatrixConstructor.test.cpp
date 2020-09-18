@@ -3,7 +3,7 @@
 namespace Test {
   namespace Matrix {
     namespace Constructor {
-      void run_all_tests();
+      bool run_all_tests();
 
       bool should_not_construct_non_uniform_matrix();
       bool should_not_construct_matrix_with_empty_rows();
