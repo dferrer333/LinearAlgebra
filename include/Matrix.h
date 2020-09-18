@@ -12,31 +12,33 @@ namespace LinearAlgebra {
   class Matrix {
     public:
       Matrix() = delete;
-      Matrix(TwoDArray const &matrix);
-      Matrix(Matrix const &other);
-      Matrix(MatrixPointer const &otherPointer);
+      Matrix(TwoDArray const &rows);
+      Matrix(Matrix const &otherMatrix);
+      Matrix(MatrixPointer const &otherMatrixPointer);
 
       int getWidth();
       int getHeight();
 
-      Matrix multiplyAndCopy(Matrix const &other) const;
-      Matrix divideAndCopy(Matrix const &other) const;
-      Matrix addAndCopy(Matrix const &other) const;
-      Matrix subtractAndCopy(Matrix const &other) const;
+      Matrix multiplyAndCopy(Matrix const &otherMatrix) const;
+      Matrix divideAndCopy(Matrix const &otherMatrix) const;
+      Matrix addAndCopy(Matrix const &otherMatrix) const;
+      Matrix subtractAndCopy(Matrix const &otherMatrix) const;
 
-      Matrix& operator*(Matrix const &other);
-      Matrix& operator/(Matrix const &other);
-      Matrix& operator+(Matrix const &other);
-      Matrix& operator-(Matrix const &other);
+      Matrix& operator*(Matrix const &otherMatrix);
+      Matrix& operator/(Matrix const &otherMatrix);
+      Matrix& operator+(Matrix const &otherMatrix);
+      Matrix& operator-(Matrix const &otherMatrix);
 
     private:
-      TwoDArray matrix;
+      TwoDArray rows;
+      int matrixWidth;
+      int matrixHeight;
 
       void ensureMatrixHasRowsAndColumns() const;
       void ensureMatrixIsUniform() const;
   };
 
-  MatrixPointer createMatrixCopyOnHeap(Matrix const &matrixToCopy);
+  MatrixPointer createMatrixCopyOnHeap(Matrix const &otherMatrix);
 
   MatrixPointer createIdentityMatrix(size_t size);
 
