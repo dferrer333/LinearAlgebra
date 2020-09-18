@@ -1,5 +1,5 @@
 #include "Matrix.h"
-#include "../TestLogger.cpp"
+#include "TestLogger.h"
 
 namespace Test {
   namespace Matrix {
@@ -18,7 +18,6 @@ namespace Test {
       bool should_construct_non_square_matrix();
 
       bool should_copy_construct_a_matrix();
-      bool should_copy_construct_a_matrix_pointer();
     }
   }
 }
@@ -32,8 +31,7 @@ bool Test::Matrix::Constructor::run_all_tests() {
       Test::Matrix::Constructor::should_construct_very_large_matrix() &&
       Test::Matrix::Constructor::should_construct_square_matrix() &&
       Test::Matrix::Constructor::should_construct_non_square_matrix() &&
-      Test::Matrix::Constructor::should_copy_construct_a_matrix() &&
-      Test::Matrix::Constructor::should_copy_construct_a_matrix_pointer());
+      Test::Matrix::Constructor::should_copy_construct_a_matrix());
 }
 
 bool Test::Matrix::Constructor::should_not_construct_non_uniform_matrix() {
@@ -160,22 +158,6 @@ bool Test::Matrix::Constructor::should_copy_construct_a_matrix() {
   try {
     LA::Matrix copiedMatrix = matrix;
     LA::Matrix otherCopiedMatrix(copiedMatrix);
-  } catch (...) {
-    Logger::print_failure(__FUNCTION__, __FILE__, __LINE__);
-    return false;
-  }
-
-  Logger::print_success(__FUNCTION__, __FILE__, __LINE__);
-  return true;
-}
-bool Test::Matrix::Constructor::should_copy_construct_a_matrix_pointer() {
-  LA::OneDArray row1 = {1};
-  LA::TwoDArray rows = {row1};
-  LA::Matrix matrix(rows);
-  LA::MatrixPointer matrixToCopy = LA::createMatrixCopyOnHeap(matrix);
-  
-  try {
-    LA::Matrix newMatrix(matrixToCopy);
   } catch (...) {
     Logger::print_failure(__FUNCTION__, __FILE__, __LINE__);
     return false;

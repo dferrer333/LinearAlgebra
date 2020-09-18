@@ -1,4 +1,4 @@
-#include "AllTests.cpp"
+#include "AllTests.test.cpp"
 #include <cassert>
 
 int main() {

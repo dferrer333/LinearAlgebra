@@ -1,9 +1,11 @@
-#include "../TestLogger.cpp"
+#include "TestLogger.h"
 
 namespace Test {
   namespace Matrix {
     namespace Add {
-      bool run_all_tests();
+      bool run_all_tests() {
+        return true;
+      }
 
       bool should_not_add_matrices_without_columns();
       bool should_not_add_matrices_without_rows();

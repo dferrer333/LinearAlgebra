@@ -1,24 +1,6 @@
 #include <iostream>
 #include <string>
-
-namespace Test {
-  namespace Logger {
-    void print_success(
-        std::string fileName,
-        std::string functionName,
-        int lineNumber);
-    void print_failure(
-        std::string fileName,
-        std::string functionName,
-        int lineNumber);
-    void print_message(
-        std::ostream &outputStream,
-        std::string testTag,
-        std::string &functionName,
-        std::string &fileName,
-        int lineNumber);
-  }
-}
+#include "TestLogger.h"
 
 void Test::Logger::print_success(
     std::string functionName, std::string fileName, int lineNumber) {
