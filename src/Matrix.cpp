@@ -28,18 +28,57 @@ LinearAlgebra::MatrixPointer LinearAlgebra::Matrix::addAndCopy(
     throw "Error: matrices must have equal heights and widths when adding.";
   }
 
-  MatrixPointer summedMatrix =
-      std::make_unique<Matrix>(otherMatrix.getHeight());
-  
-  // TODO - add iterators before continuing
-  // for (auto row : )
+  TwoDArray summedMatrix;
+  OneDArray temporaryRow(otherMatrix.getWidth());
+  for (size_t i = 0; i < otherMatrix.getHeight(); i++) {
+    for (size_t j = 0; j < otherMatrix.getWidth(); j++) {
+      temporaryRow[j] = (*this)[i][j] + otherMatrix[i][j];
+    }
+
+    summedMatrix.push_back(temporaryRow);
+  }
+
+  return std::make_unique<Matrix>(summedMatrix);
 }
 
-LinearAlgebra::TwoDArray::const_iterator LinearAlgebra::Matrix::begin() const {
+LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator+(
+    LinearAlgebra::Matrix const &otherMatrix) {
+  if (this->getWidth() != otherMatrix.getWidth() ||
+      this->getHeight() != otherMatrix.getHeight()) {
+    throw "Error: matrices must have equal heights and widths when adding.";
+  }
+
+  for (size_t i = 0; i < otherMatrix.getHeight(); i++) {
+    for (size_t j = 0; j < otherMatrix.getWidth(); j++) {
+      (*this)[i][j] += otherMatrix[i][j];
+    }
+  }
+
+  return *this;
+}
+
+const LinearAlgebra::OneDArray& LinearAlgebra::Matrix::operator[](
+    size_t const rowIndex) const {
+  if (rowIndex < 0 || rowIndex >= this->getHeight()) {
+    throw "Error: invalid access row index.";
+  }
+  return this->rows[rowIndex];
+}
+
+LinearAlgebra::OneDArray& LinearAlgebra::Matrix::operator[](
+    size_t const rowIndex) {
+  if (rowIndex < 0 || rowIndex >= this->getHeight()) {
+    throw "Error: invalid access row index.";
+  }
+
+  return this->rows[rowIndex];
+}
+
+LinearAlgebra::TwoDArray::iterator LinearAlgebra::Matrix::begin() {
   return this->rows.begin();
 }
 
-LinearAlgebra::TwoDArray::const_iterator LinearAlgebra::Matrix::end() const {
+LinearAlgebra::TwoDArray::iterator LinearAlgebra::Matrix::end()  {
   return this->rows.end();
 }
 

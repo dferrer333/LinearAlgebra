@@ -30,8 +30,11 @@ namespace LinearAlgebra {
       Matrix& operator+(Matrix const &otherMatrix);
       Matrix& operator-(Matrix const &otherMatrix);
 
-      TwoDArray::const_iterator begin() const;
-      TwoDArray::const_iterator end() const;
+      const OneDArray& operator[](size_t rowIndex) const;
+      OneDArray& operator[](size_t rowIndex);
+
+      TwoDArray::iterator begin();
+      TwoDArray::iterator end();
 
     private:
       TwoDArray rows;
