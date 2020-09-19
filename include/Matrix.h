@@ -17,8 +17,8 @@ namespace LinearAlgebra {
       Matrix(TwoDArray const &rows);
       Matrix(Matrix const &otherMatrix);
 
-      int getWidth() const;
-      int getHeight() const;
+      size_t getWidth() const;
+      size_t getHeight() const;
 
       Matrix operator*(Matrix const &otherMatrix) const;
       Matrix& operator*=(Matrix const &otherMatrix);

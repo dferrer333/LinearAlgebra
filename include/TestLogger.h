@@ -7,12 +7,12 @@
 namespace Test {
   namespace Logger {
     void print_success(
-        std::string fileName,
         std::string functionName,
+        std::string fileName,
         int lineNumber);
     void print_failure(
-        std::string fileName,
         std::string functionName,
+        std::string fileName,
         int lineNumber);
     void print_message(
         std::ostream &outputStream,

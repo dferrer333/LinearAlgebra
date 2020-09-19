@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 IDIR=include
 CXX=g++
-CXXFLAGS=-I$(IDIR) -Wall -Werror
+CXXFLAGS=-I$(IDIR) -Wall -Werror -Wfatal-errors
 
 SRCDIR=src
 TESTDIR=src/test

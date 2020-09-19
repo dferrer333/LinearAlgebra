@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Matrix.h"
 
 LinearAlgebra::Matrix::Matrix(LinearAlgebra::TwoDArray const &rows)
@@ -13,16 +12,20 @@ LinearAlgebra::Matrix::Matrix(LinearAlgebra::Matrix const &otherMatrix)
   this->ensureMatrixIsUniform();
 }
 
-int LinearAlgebra::Matrix::getWidth() const {
-  return this->rows.size();
+size_t LinearAlgebra::Matrix::getWidth() const {
+  return this->rows[0].size();
 }
 
-int LinearAlgebra::Matrix::getHeight() const {
-  return this->rows[0].size();
+size_t LinearAlgebra::Matrix::getHeight() const {
+  return this->rows.size();
 }
 
 LinearAlgebra::Matrix LinearAlgebra::Matrix::operator+(
     LinearAlgebra::Matrix const &otherMatrix) const {
+  if (this->getHeight() == 0 || otherMatrix.getHeight() == 0 ||
+      this->getWidth() == 0 || otherMatrix.getWidth() == 0) {
+    throw "Error: matrices must have positive width and height.";
+  }
   if (this->getWidth() != otherMatrix.getWidth() ||
       this->getHeight() != otherMatrix.getHeight()) {
     throw "Error: matrices must have equal heights and widths when adding.";
@@ -43,6 +46,10 @@ LinearAlgebra::Matrix LinearAlgebra::Matrix::operator+(
 
 LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator+=(
     LinearAlgebra::Matrix const &otherMatrix) {
+  if (this->getHeight() == 0 || otherMatrix.getHeight() == 0 ||
+      this->getWidth() == 0 || otherMatrix.getWidth() == 0) {
+    throw "Error: matrices must have positive width and height.";
+  }
   if (this->getWidth() != otherMatrix.getWidth() ||
       this->getHeight() != otherMatrix.getHeight()) {
     throw "Error: matrices must have equal heights and widths when adding.";

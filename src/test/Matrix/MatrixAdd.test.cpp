@@ -1,4 +1,4 @@
-#include <iostream>
+#include "Matrix.h"
 #include <string>
 #include "TestLogger.h"
 
@@ -10,7 +10,6 @@ namespace Test {
       bool run_all_tests();
 
       bool should_not_add_matrices_without_columns();
-      bool should_not_add_matrices_without_rows();
       bool should_not_add_matrices_with_varied_sizes();
 
       bool should_add_two_uniform_matrices();
@@ -123,33 +122,33 @@ bool Test::Matrix::Add::run_matrix_addition(
   callingFunctionName += std::string(",") + std::string(__FUNCTION__);
   try {
     LA::Matrix result = matrix1 + matrix2;
-    Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+    Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
     return false;
-  } catch (std::string errorMessage) {
+  } catch (char const* errorMessage) {
     std::cerr << "[SUCCESS] - " << errorMessage << '\n';
   }
   try {
     LA::Matrix result = matrix2 + matrix1;
-    Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+    Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
     return false;
-  } catch (std::string errorMessage) {
+  } catch (char const* errorMessage) {
     std::cerr << "[SUCCESS] - " << errorMessage << '\n';
   }
   try {
     matrix1 += matrix2;
-    Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+    Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
     return false;
-  } catch (std::string errorMessage) {
+  } catch (char const* errorMessage) {
     std::cerr << "[SUCCESS] - " << errorMessage << '\n';
   }
   try {
     matrix1 += matrix2;
-  } catch (std::string errorMessage) {
-    Logger::print_success(__FILE__, callingFunctionName, __LINE__);
+  } catch (...) {
+    Logger::print_success(callingFunctionName, __FILE__, __LINE__);
     return true;
   }
   
-  Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+  Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
   return false;
 }
 
@@ -160,16 +159,16 @@ bool Test::Matrix::Add::run_matrix_addition(
     LA::Matrix &matrixResult) {
   callingFunctionName += std::string(",") + std::string(__FUNCTION__);
   if ((matrix1 + matrix2) != matrixResult) {
-    Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+    Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
     return false;
   }
 
   matrix1 += matrix2;
   if (matrix1 != matrixResult) {
-    Logger::print_failure(__FILE__, callingFunctionName, __LINE__);
+    Logger::print_failure(callingFunctionName, __FILE__, __LINE__);
     return false;
   }
   
-  Logger::print_success(__FILE__, callingFunctionName, __LINE__);
+  Logger::print_success(callingFunctionName, __FILE__, __LINE__);
   return true;
 }
