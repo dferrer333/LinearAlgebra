@@ -24,14 +24,14 @@ namespace Test {
 
 bool Test::Matrix::Constructor::run_all_tests() {
   return (
-      Test::Matrix::Constructor::should_not_construct_non_uniform_matrix() &&
-      Test::Matrix::Constructor::should_not_construct_empty_row_matrix() &&
-      Test::Matrix::Constructor::should_not_construct_empty_column_matrix() &&
-      Test::Matrix::Constructor::should_construct_matrix_with_one_element() &&
-      Test::Matrix::Constructor::should_construct_very_large_matrix() &&
-      Test::Matrix::Constructor::should_construct_square_matrix() &&
-      Test::Matrix::Constructor::should_construct_non_square_matrix() &&
-      Test::Matrix::Constructor::should_copy_construct_a_matrix());
+      should_not_construct_non_uniform_matrix() &&
+      should_not_construct_empty_row_matrix() &&
+      should_not_construct_empty_column_matrix() &&
+      should_construct_matrix_with_one_element() &&
+      should_construct_very_large_matrix() &&
+      should_construct_square_matrix() &&
+      should_construct_non_square_matrix() &&
+      should_copy_construct_a_matrix());
 }
 
 bool Test::Matrix::Constructor::should_not_construct_non_uniform_matrix() {
