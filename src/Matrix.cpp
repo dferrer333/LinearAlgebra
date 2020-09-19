@@ -21,7 +21,7 @@ int LinearAlgebra::Matrix::getHeight() const {
   return this->rows[0].size();
 }
 
-LinearAlgebra::MatrixPointer LinearAlgebra::Matrix::addAndCopy(
+LinearAlgebra::Matrix LinearAlgebra::Matrix::operator+(
     LinearAlgebra::Matrix const &otherMatrix) const {
   if (this->getWidth() != otherMatrix.getWidth() ||
       this->getHeight() != otherMatrix.getHeight()) {
@@ -38,10 +38,10 @@ LinearAlgebra::MatrixPointer LinearAlgebra::Matrix::addAndCopy(
     summedMatrix.push_back(temporaryRow);
   }
 
-  return std::make_unique<Matrix>(summedMatrix);
+  return Matrix(summedMatrix);
 }
 
-LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator+(
+LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator+=(
     LinearAlgebra::Matrix const &otherMatrix) {
   if (this->getWidth() != otherMatrix.getWidth() ||
       this->getHeight() != otherMatrix.getHeight()) {
@@ -54,6 +54,12 @@ LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator+(
     }
   }
 
+  return *this;
+}
+
+LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator=(
+    Matrix const &otherMatrix) {
+  this->rows = otherMatrix.rows;
   return *this;
 }
 

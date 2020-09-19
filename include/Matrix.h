@@ -20,15 +20,15 @@ namespace LinearAlgebra {
       int getWidth() const;
       int getHeight() const;
 
-      MatrixPointer multiplyAndCopy(Matrix const &otherMatrix) const;
-      MatrixPointer divideAndCopy(Matrix const &otherMatrix) const;
-      MatrixPointer addAndCopy(Matrix const &otherMatrix) const;
-      MatrixPointer subtractAndCopy(Matrix const &otherMatrix) const;
-
-      Matrix& operator*(Matrix const &otherMatrix);
-      Matrix& operator/(Matrix const &otherMatrix);
-      Matrix& operator+(Matrix const &otherMatrix);
-      Matrix& operator-(Matrix const &otherMatrix);
+      Matrix operator*(Matrix const &otherMatrix) const;
+      Matrix& operator*=(Matrix const &otherMatrix);
+      Matrix operator/(Matrix const &otherMatrix) const;
+      Matrix& operator/=(Matrix const &otherMatrix);
+      Matrix operator+(Matrix const &otherMatrix) const;
+      Matrix& operator+=(Matrix const &otherMatrix);
+      Matrix operator-(Matrix const &otherMatrix) const;
+      Matrix& operator-=(Matrix const &otherMatrix);
+      Matrix& operator=(Matrix const &otherMatrix);
 
       const OneDArray& operator[](size_t rowIndex) const;
       OneDArray& operator[](size_t rowIndex);
