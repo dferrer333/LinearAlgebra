@@ -35,6 +35,14 @@ LinearAlgebra::MatrixPointer LinearAlgebra::Matrix::addAndCopy(
   // for (auto row : )
 }
 
+LinearAlgebra::TwoDArray::const_iterator LinearAlgebra::Matrix::begin() const {
+  return this->rows.begin();
+}
+
+LinearAlgebra::TwoDArray::const_iterator LinearAlgebra::Matrix::end() const {
+  return this->rows.end();
+}
+
 void LinearAlgebra::Matrix::ensureMatrixHasRowsAndColumns() const {
   if (this->rows.size() == 0 || this->rows[0].size() == 0) {
     throw "Error: matrix must have both rows and columns.";

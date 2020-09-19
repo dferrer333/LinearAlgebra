@@ -1,6 +1,7 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <iterator>
 #include <memory>
 #include <vector>
 
@@ -28,6 +29,9 @@ namespace LinearAlgebra {
       Matrix& operator/(Matrix const &otherMatrix);
       Matrix& operator+(Matrix const &otherMatrix);
       Matrix& operator-(Matrix const &otherMatrix);
+
+      TwoDArray::const_iterator begin() const;
+      TwoDArray::const_iterator end() const;
 
     private:
       TwoDArray rows;
