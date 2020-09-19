@@ -106,7 +106,7 @@ bool Test::Matrix::Constructor::should_construct_very_large_matrix() {
   try {
     LA::Matrix matrix(rows);
 
-    if (matrix.getWidth() != 1000 || matrix.getHeight() != 1) {
+    if (matrix.getWidth() != 1000 || matrix.getHeight() != 1000) {
       throw "matrix width or height not equal to 1000";
     }
   } catch (...) {
