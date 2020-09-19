@@ -9,6 +9,8 @@ namespace LinearAlgebra {
   using TwoDArray = std::vector<std::vector<float>>;
 
   class Matrix {
+    using MatrixPointer = std::unique_ptr<Matrix>;
+
     public:
       Matrix() = delete;
       Matrix(TwoDArray const &rows);
@@ -17,10 +19,10 @@ namespace LinearAlgebra {
       int getWidth() const;
       int getHeight() const;
 
-      Matrix multiplyAndCopy(Matrix const &otherMatrix) const;
-      Matrix divideAndCopy(Matrix const &otherMatrix) const;
-      Matrix addAndCopy(Matrix const &otherMatrix) const;
-      Matrix subtractAndCopy(Matrix const &otherMatrix) const;
+      MatrixPointer multiplyAndCopy(Matrix const &otherMatrix) const;
+      MatrixPointer divideAndCopy(Matrix const &otherMatrix) const;
+      MatrixPointer addAndCopy(Matrix const &otherMatrix) const;
+      MatrixPointer subtractAndCopy(Matrix const &otherMatrix) const;
 
       Matrix& operator*(Matrix const &otherMatrix);
       Matrix& operator/(Matrix const &otherMatrix);
