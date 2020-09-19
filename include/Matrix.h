@@ -43,6 +43,9 @@ namespace LinearAlgebra {
       void ensureMatrixIsUniform() const;
   };
 
+  bool operator==(Matrix const &matrix1, Matrix const &matrix2);
+  bool operator!=(Matrix const &matrix1, Matrix const &matrix2);
+
   using MatrixPointer = std::unique_ptr<Matrix>;
 
   MatrixPointer createMatrixCopyOnHeap(Matrix const &otherMatrix);

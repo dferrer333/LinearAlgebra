@@ -103,3 +103,28 @@ void LinearAlgebra::Matrix::ensureMatrixIsUniform() const {
     }
   }
 }
+
+bool LinearAlgebra::operator==(
+    LinearAlgebra::Matrix const &matrix1,
+    LinearAlgebra::Matrix const &matrix2) {
+  if (matrix1.getWidth() != matrix2.getWidth() ||
+      matrix1.getHeight() != matrix2.getHeight()) {
+    return false;
+  }
+
+  for (size_t i = 0; i < matrix1.getHeight(); i++) {
+    for (size_t j = 0; j < matrix1.getWidth(); j++) {
+      if (matrix1[i][j] != matrix2[i][j]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool LinearAlgebra::operator!=(
+    LinearAlgebra::Matrix const &matrix1,
+    LinearAlgebra::Matrix const &matrix2) {
+  return !(matrix1 == matrix2);
+}
