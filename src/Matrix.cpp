@@ -26,28 +26,28 @@ namespace LinearAlgebra {
     ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
     ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
 
-    return operateAndMakeCopy(std::plus<float>(), otherMatrix);
+    return operateAndMakeCopy(std::plus<MatrixElement>(), otherMatrix);
   }
 
   Matrix& Matrix::operator+=(Matrix const &otherMatrix) {
     ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
     ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
 
-    return operateAndAssignToSelf(std::plus<float>(), otherMatrix);
+    return operateAndAssignToSelf(std::plus<MatrixElement>(), otherMatrix);
   }
 
   Matrix Matrix::operator-(Matrix const &otherMatrix) const {
     ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
     ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
 
-    return operateAndMakeCopy(std::minus<float>(), otherMatrix);
+    return operateAndMakeCopy(std::minus<MatrixElement>(), otherMatrix);
   }
 
   Matrix& Matrix::operator-=(Matrix const &otherMatrix) {
     ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
     ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
 
-    return operateAndAssignToSelf(std::minus<float>(), otherMatrix);
+    return operateAndAssignToSelf(std::minus<MatrixElement>(), otherMatrix);
   }
 
   Matrix& Matrix::operator=(Matrix const &otherMatrix) {
@@ -146,7 +146,7 @@ namespace LinearAlgebra {
 
     for (size_t i = 0; i < matrix1.getHeight(); i++) {
       for (size_t j = 0; j < matrix1.getWidth(); j++) {
-        if (std::abs(matrix1[i][j] - matrix2[i][j]) > 0.00001) {
+        if (std::abs(matrix1[i][j] - matrix2[i][j]) >= EQ_PRECISION) {
           return false;
         }
       }

@@ -6,8 +6,11 @@
 #include <vector>
 
 namespace LinearAlgebra {
-  using OneDArray = std::vector<float>;
-  using TwoDArray = std::vector<std::vector<float>>;
+  const double EQ_PRECISION = 0.00000000001;
+
+  using MatrixElement = double;
+  using OneDArray = std::vector<MatrixElement>;
+  using TwoDArray = std::vector<std::vector<MatrixElement>>;
 
   class Matrix {
     using MatrixPointer = std::unique_ptr<Matrix>;
