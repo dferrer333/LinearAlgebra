@@ -12,9 +12,6 @@
 # project, except GTEST_HEADERS, which you can use in your own targets
 # but shouldn't modify.
 
-# compiler
-CXX = g++
-
 # Points to the root of Google Test, relative to where this file is.
 # Remember to tweak this if you move this file.
 GTEST_DIR = ../include/gtest
@@ -28,7 +25,7 @@ USER_DIR = ../src
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 
 # Flags passed to the C++ compiler.
-CXXFLAGS += -g -Wall -Wextra -pthread
+CXXFLAGS += -g -Wall -Wextra -Wfatal-errors -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
