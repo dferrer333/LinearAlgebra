@@ -30,6 +30,13 @@ namespace LinearAlgebra {
       Matrix& operator-=(Matrix const &otherMatrix);
       Matrix& operator=(Matrix const &otherMatrix);
 
+      template <class Operation>
+      Matrix operateAndMakeCopy(
+          Operation operate, Matrix const &otherMatrix) const;
+      template <class Operation>
+      Matrix &operateAndAssignToSelf(
+          Operation operate, Matrix const &otherMatrix);
+
       const OneDArray& operator[](size_t rowIndex) const;
       OneDArray& operator[](size_t rowIndex);
 
@@ -43,7 +50,9 @@ namespace LinearAlgebra {
       void ensureMatrixIsUniform() const;
   };
 
-  void ensureMatricesAreCompatible(
+  void ensureMatricesHavePositiveHeightAndWidth(
+      Matrix const &matrix1, Matrix const &matrix2);
+  void ensureMatricesHaveEqualHeightAndWidth(
       Matrix const &matrix1, Matrix const &matrix2);
 
   bool operator==(Matrix const &matrix1, Matrix const &matrix2);

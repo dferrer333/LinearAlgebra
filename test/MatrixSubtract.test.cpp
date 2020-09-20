@@ -52,15 +52,16 @@ namespace {
     LA::Matrix matrix2(rows2);
 
     LA::TwoDArray rowsResult1 =
-        {{-13.0,-75.33,15.7},{-26.1,-10.0,-9.347},{1.2,5.3,11.8}};
+        {{-13.0,-75.339,15.7},{-26.1,-10.0,-9.347},{1.2,5.3,11.8}};
     LA::Matrix matrixResult1(rowsResult1);
 
     LA::TwoDArray rowsResult2 =
-        {{13.0,75.33,-15.7},{26.1,10.0,9.347},{-1.2,-5.3,-11.8}};
+        {{13.0,75.339,-15.7},{26.1,10.0,9.347},{-1.2,-5.3,-11.8}};
+    LA::Matrix matrixResult2(rowsResult2);
     
-    ASSERT_EQ(rowsResult1, matrix1 - matrix2);
-    ASSERT_EQ(rowsResult2, matrix2 - matrix1);
-    ASSERT_EQ(rowsResult2, matrix2 -= matrix1);
+    ASSERT_EQ(matrixResult1, matrix1 - matrix2);
+    ASSERT_EQ(matrixResult2, matrix2 - matrix1);
+    ASSERT_EQ(matrixResult2, matrix2 -= matrix1);
   }
 
   TEST(MatrixSubtractTests, shouldSubtractTwoNonUniformMatrices) {
@@ -72,11 +73,11 @@ namespace {
     LA::Matrix matrix2(rows2);
 
     LA::TwoDArray rowsResult1 =
-        {{-13.0,-75.33,15.7},{-26.1,-10.0,-9.347}};
+        {{-13.0,-75.339,15.7},{-26.1,-10.0,-9.347}};
     LA::Matrix matrixResult1(rowsResult1);
 
     LA::TwoDArray rowsResult2 =
-        {{13.0,75.33,-15.7},{26.1,10.0,9.347}};
+        {{13.0,75.339,-15.7},{26.1,10.0,9.347}};
     LA::Matrix matrixResult2(rowsResult2);
     
     ASSERT_EQ(matrixResult1, matrix1 - matrix2);
@@ -87,8 +88,8 @@ namespace {
   TEST(MatrixSubtractTests, shouldSubtractTwoSingleElementMatrices) {
     LA::Matrix matrix1 = LA::TwoDArray(1, (LA::OneDArray(1, 1.78)));
     LA::Matrix matrix2 = LA::TwoDArray(1, (LA::OneDArray(1, 0.34)));
-    LA::Matrix matrixResult1 = LA::TwoDArray(1, LA::OneDArray(1, 0.44));
-    LA::Matrix matrixResult2 = LA::TwoDArray(1, LA::OneDArray(1, -0.44));
+    LA::Matrix matrixResult1 = LA::TwoDArray(1, LA::OneDArray(1, 1.44));
+    LA::Matrix matrixResult2 = LA::TwoDArray(1, LA::OneDArray(1, -1.44));
 
     ASSERT_EQ(matrixResult1, matrix1 - matrix2);
     ASSERT_EQ(matrixResult2, matrix2 - matrix1);

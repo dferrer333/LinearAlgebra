@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Matrix.h"
 
 namespace LinearAlgebra {
@@ -22,13 +23,46 @@ namespace LinearAlgebra {
   }
 
   Matrix Matrix::operator+(Matrix const &otherMatrix) const {
-    ensureMatricesAreCompatible(*this, otherMatrix);
+    ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
+    ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
 
+    return operateAndMakeCopy(std::plus<float>(), otherMatrix);
+  }
+
+  Matrix& Matrix::operator+=(Matrix const &otherMatrix) {
+    ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
+    ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
+
+    return operateAndAssignToSelf(std::plus<float>(), otherMatrix);
+  }
+
+  Matrix Matrix::operator-(Matrix const &otherMatrix) const {
+    ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
+    ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
+
+    return operateAndMakeCopy(std::minus<float>(), otherMatrix);
+  }
+
+  Matrix& Matrix::operator-=(Matrix const &otherMatrix) {
+    ensureMatricesHavePositiveHeightAndWidth(*this, otherMatrix);
+    ensureMatricesHaveEqualHeightAndWidth(*this, otherMatrix);
+
+    return operateAndAssignToSelf(std::minus<float>(), otherMatrix);
+  }
+
+  Matrix& Matrix::operator=(Matrix const &otherMatrix) {
+    this->rows = otherMatrix.rows;
+    return *this;
+  }
+
+  template <class Operation>
+  Matrix Matrix::operateAndMakeCopy(
+      Operation operate, Matrix const &otherMatrix) const {
     TwoDArray summedMatrix;
     OneDArray temporaryRow(otherMatrix.getWidth());
     for (size_t i = 0; i < otherMatrix.getHeight(); i++) {
       for (size_t j = 0; j < otherMatrix.getWidth(); j++) {
-        temporaryRow[j] = (*this)[i][j] + otherMatrix[i][j];
+        temporaryRow[j] = operate((*this)[i][j], otherMatrix[i][j]);
       }
 
       summedMatrix.push_back(temporaryRow);
@@ -37,32 +71,15 @@ namespace LinearAlgebra {
     return Matrix(summedMatrix);
   }
 
-  Matrix& Matrix::operator+=(Matrix const &otherMatrix) {
-    ensureMatricesAreCompatible(*this, otherMatrix);
-
+  template <class Operation>
+  Matrix& Matrix::operateAndAssignToSelf(
+      Operation operate, Matrix const &otherMatrix) {
     for (size_t i = 0; i < otherMatrix.getHeight(); i++) {
       for (size_t j = 0; j < otherMatrix.getWidth(); j++) {
-        (*this)[i][j] += otherMatrix[i][j];
+        (*this)[i][j] = operate((*this)[i][j], otherMatrix[i][j]);
       }
     }
 
-    return *this;
-  }
-
-  void ensureMatricesAreCompatible(
-      Matrix const &matrix1, Matrix const &matrix2) {
-    if (matrix1.getHeight() == 0 || matrix2.getHeight() == 0 ||
-        matrix1.getWidth() == 0 || matrix2.getWidth() == 0) {
-      throw "Error: matrices must have positive width and height.";
-    }
-    if (matrix1.getWidth() != matrix2.getWidth() ||
-        matrix1.getHeight() != matrix2.getHeight()) {
-      throw "Error: matrices must have equal heights and widths when adding.";
-    }
-  }
-
-  Matrix& Matrix::operator=(Matrix const &otherMatrix) {
-    this->rows = otherMatrix.rows;
     return *this;
   }
 
@@ -105,6 +122,22 @@ namespace LinearAlgebra {
     }
   }
 
+  void ensureMatricesHavePositiveHeightAndWidth(
+      Matrix const &matrix1, Matrix const &matrix2) {
+    if (matrix1.getHeight() == 0 || matrix2.getHeight() == 0 ||
+        matrix1.getWidth() == 0 || matrix2.getWidth() == 0) {
+      throw "Error: matrices must have positive width and height.";
+    }
+  }
+
+  void ensureMatricesHaveEqualHeightAndWidth(
+      Matrix const &matrix1, Matrix const &matrix2) {
+    if (matrix1.getWidth() != matrix2.getWidth() ||
+        matrix1.getHeight() != matrix2.getHeight()) {
+      throw "Error: matrices must have equal heights and widths when adding.";
+    }
+  }
+
   bool operator==(Matrix const &matrix1, Matrix const &matrix2) {
     if (matrix1.getWidth() != matrix2.getWidth() ||
         matrix1.getHeight() != matrix2.getHeight()) {
@@ -113,7 +146,7 @@ namespace LinearAlgebra {
 
     for (size_t i = 0; i < matrix1.getHeight(); i++) {
       for (size_t j = 0; j < matrix1.getWidth(); j++) {
-        if (matrix1[i][j] != matrix2[i][j]) {
+        if (std::abs(matrix1[i][j] - matrix2[i][j]) > 0.00001) {
           return false;
         }
       }

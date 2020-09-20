@@ -29,7 +29,7 @@ CXXFLAGS += -g -Wall -Wextra -Wfatal-errors -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = MatrixConstructor.test MatrixAdd.test
+TESTS = MatrixConstructor.test MatrixAdd.test MatrixSubtract.test
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -85,4 +85,12 @@ MatrixAdd.test.o : MatrixAdd.test.cpp $(USER_DIR)/Matrix.h \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c MatrixAdd.test.cpp
 
 MatrixAdd.test : Matrix.o MatrixAdd.test.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+
+MatrixSubtract.test.o : MatrixSubtract.test.cpp $(USER_DIR)/Matrix.h \
+												$(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c MatrixSubtract.test.cpp
+
+MatrixSubtract.test : Matrix.o MatrixSubtract.test.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
