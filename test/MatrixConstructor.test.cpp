@@ -4,7 +4,7 @@
 namespace {
   namespace LA = LinearAlgebra;
 
-  TEST(MatrixConstructorTest, shouldNotConstructNonUniformMatrix) {
+  TEST(MatrixConstructorTests, shouldNotConstructNonUniformMatrix) {
     LA::OneDArray row1 = {1,2,3};
     LA::OneDArray row2 = {3,4};
     LA::TwoDArray rows = {row1,row2};
@@ -19,7 +19,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldNotConstructEmptyRowMatrix) {
+  TEST(MatrixConstructorTests, shouldNotConstructEmptyRowMatrix) {
     LA::TwoDArray rows(0);
 
     bool succeeded = false;
@@ -32,7 +32,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldNotConstructEmptyColumnMatrix) {
+  TEST(MatrixConstructorTests, shouldNotConstructEmptyColumnMatrix) {
     LA::OneDArray row1(0);
     LA::OneDArray row2(0);
     LA::TwoDArray rows = {row1,row2};
@@ -47,7 +47,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldConstructMatrixWithOneElement) {
+  TEST(MatrixConstructorTests, shouldConstructMatrixWithOneElement) {
     LA::OneDArray row1 = {1.5};
     LA::TwoDArray rows = {row1};
 
@@ -63,7 +63,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldConstructVeryLargeMatrix) {
+  TEST(MatrixConstructorTests, shouldConstructVeryLargeMatrix) {
     LA::TwoDArray rows;
 
     for (size_t i = 0; i < 1000; i++) {
@@ -82,7 +82,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldConstructSquareMatrix) {
+  TEST(MatrixConstructorTests, shouldConstructSquareMatrix) {
     LA::OneDArray row1 = {1,2,3};
     LA::OneDArray row2 = {4,5,6};
     LA::OneDArray row3 = {7.2,3.1,4};
@@ -98,7 +98,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldConstructNonSquareMatrix) {
+  TEST(MatrixConstructorTests, shouldConstructNonSquareMatrix) {
     LA::OneDArray row1 = {1,2};
     LA::OneDArray row2 = {4,5};
     LA::OneDArray row3 = {7.2,3.1};
@@ -114,7 +114,7 @@ namespace {
     ASSERT_TRUE(succeeded);
   }
 
-  TEST(MatrixConstructorTest, shouldCopyConstructMatrix) {
+  TEST(MatrixConstructorTests, shouldCopyConstructMatrix) {
     LA::OneDArray row1 = {1};
     LA::TwoDArray rows = {row1};
     LA::Matrix matrix(rows);
