@@ -9,27 +9,13 @@ namespace {
     LA::OneDArray row2 = {3,4};
     LA::TwoDArray rows = {row1,row2};
 
-    bool succeeded = false;
-    try {
-      LA::Matrix matrix(rows);
-    } catch (...) {
-      succeeded = true;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_ANY_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldNotConstructEmptyRowMatrix) {
     LA::TwoDArray rows(0);
 
-    bool succeeded = false;
-    try {
-      LA::Matrix matrix(rows);
-    } catch (...) {
-      succeeded = true;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_ANY_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldNotConstructEmptyColumnMatrix) {
@@ -37,30 +23,14 @@ namespace {
     LA::OneDArray row2(0);
     LA::TwoDArray rows = {row1,row2};
 
-    bool succeeded = false;
-    try {
-      LA::Matrix matrix(rows);
-    } catch (...) {
-      succeeded = true;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_ANY_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldConstructMatrixWithOneElement) {
     LA::OneDArray row1 = {1.5};
     LA::TwoDArray rows = {row1};
 
-    bool succeeded = false;
-    try {
-      LA::Matrix matrix(rows);
-
-      succeeded = matrix.getWidth() == 1 || matrix.getHeight() == 1;
-    } catch (...) {
-      succeeded = false;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_NO_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldConstructVeryLargeMatrix) {
@@ -70,16 +40,10 @@ namespace {
       rows.push_back(LA::OneDArray(1000));
     }
 
-    bool succeeded = false;
-    try {
-      LA::Matrix matrix(rows);
+    ASSERT_NO_THROW(LA::Matrix matrix(rows));
 
-      succeeded = matrix.getWidth() == 1000 || matrix.getHeight() == 1000;
-    } catch (...) {
-      succeeded = false;
-    }
-
-    ASSERT_TRUE(succeeded);
+    LA::Matrix matrix(rows);
+    ASSERT_TRUE(matrix.getWidth() == 1000 || matrix.getHeight() == 1000);
   }
 
   TEST(MatrixConstructorTests, shouldConstructSquareMatrix) {
@@ -88,14 +52,7 @@ namespace {
     LA::OneDArray row3 = {7.2,3.1,4};
     LA::TwoDArray rows = {row1,row2,row3};
 
-    bool succeeded = true;
-    try {
-      LA::Matrix matrix(rows);
-    } catch (...) {
-      succeeded = false;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_NO_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldConstructNonSquareMatrix) {
@@ -104,14 +61,7 @@ namespace {
     LA::OneDArray row3 = {7.2,3.1};
     LA::TwoDArray rows = {row1,row2,row3};
 
-    bool succeeded = true;
-    try {
-      LA::Matrix matrix(rows);
-    } catch (...) {
-      succeeded = false;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_NO_THROW(LA::Matrix matrix(rows));
   }
 
   TEST(MatrixConstructorTests, shouldCopyConstructMatrix) {
@@ -119,14 +69,7 @@ namespace {
     LA::TwoDArray rows = {row1};
     LA::Matrix matrix(rows);
 
-    bool succeeded = true;
-    try {
-      LA::Matrix copiedMatrix = matrix;
-      LA::Matrix otherCopiedMatrix(copiedMatrix);
-    } catch (...) {
-      succeeded = false;
-    }
-
-    ASSERT_TRUE(succeeded);
+    ASSERT_NO_THROW(LA::Matrix copiedMatrix = matrix);
+    ASSERT_NO_THROW(LA::Matrix otherCopiedMatrix(matrix));
   }
 }
