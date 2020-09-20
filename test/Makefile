@@ -29,7 +29,11 @@ CXXFLAGS += -g -Wall -Wextra -Wfatal-errors -pthread
 
 # All tests produced by this Makefile.  Remember to add new tests you
 # created to the list.
-TESTS = MatrixConstructor.test MatrixAdd.test MatrixSubtract.test
+TEST_BDIR=bin
+TEST_LDIR=lib
+TEST_ODIR=obj
+TESTS = $(TEST_BDIR)/MatrixConstructor.test $(TEST_BDIR)/MatrixAdd.test \
+				$(TEST_BDIR)/MatrixSubtract.test
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
@@ -53,44 +57,28 @@ GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 # implementation details, the dependencies specified below are
 # conservative and not optimized.  This is fine as Google Test
 # compiles fast and for ordinary users its source rarely changes.
-gtest-all.o : $(GTEST_SRCS_)
+$(TEST_ODIR)/gtest-all.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest-all.cc
+            $(GTEST_DIR)/src/gtest-all.cc -o $@
 
-gtest_main.o : $(GTEST_SRCS_)
+$(TEST_ODIR)/gtest_main.o : $(GTEST_SRCS_)
 	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest_main.cc
+            $(GTEST_DIR)/src/gtest_main.cc -o $@
 
-gtest.a : gtest-all.o
-	$(AR) $(ARFLAGS) $@ $^
+$(TEST_LDIR)/gtest.a : $(TEST_ODIR)/gtest-all.o
+	$(AR) $(ARFLAGS) $@ $^ -o $@
 
-gtest_main.a : gtest-all.o gtest_main.o
-	$(AR) $(ARFLAGS) $@ $^
-
-
-Matrix.o : $(USER_DIR)/Matrix.cpp $(USER_DIR)/Matrix.h $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/Matrix.cpp
+$(TEST_LDIR)/gtest_main.a : $(TEST_ODIR)/gtest-all.o $(TEST_ODIR)/gtest_main.o
+	$(AR) $(ARFLAGS) $@ $^ -o $@
 
 
-MatrixConstructor.test.o : MatrixConstructor.test.cpp $(USER_DIR)/Matrix.h \
-													 $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c MatrixConstructor.test.cpp
-
-MatrixConstructor.test : Matrix.o MatrixConstructor.test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
-
-
-MatrixAdd.test.o : MatrixAdd.test.cpp $(USER_DIR)/Matrix.h \
-									 $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c MatrixAdd.test.cpp
-
-MatrixAdd.test : Matrix.o MatrixAdd.test.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
-
-
-MatrixSubtract.test.o : MatrixSubtract.test.cpp $(USER_DIR)/Matrix.h \
+$(TEST_ODIR)/Matrix.o : $(USER_DIR)/Matrix.cpp $(USER_DIR)/Matrix.h \
 												$(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c MatrixSubtract.test.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/Matrix.cpp -o $@
 
-MatrixSubtract.test : Matrix.o MatrixSubtract.test.o gtest_main.a
+$(TEST_ODIR)/%.test.o : %.test.cpp $(USER_DIR)/Matrix.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+$(TEST_BDIR)/%.test : $(TEST_ODIR)/Matrix.o $(TEST_ODIR)/%.test.o \
+											$(TEST_LDIR)/gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
