@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for test_script in *.test
+do
+  ./$test_script
+done
