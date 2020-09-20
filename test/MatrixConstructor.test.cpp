@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "Matrix.h"
+#include "../src/Matrix.h"
 
 namespace {
   namespace LA = LinearAlgebra;
@@ -55,7 +55,7 @@ namespace {
     try {
       LA::Matrix matrix(rows);
 
-      succeeded = matrix.getWidth() != 1 || matrix.getHeight() != 1;
+      succeeded = matrix.getWidth() == 1 || matrix.getHeight() == 1;
     } catch (...) {
       succeeded = false;
     }
@@ -74,7 +74,7 @@ namespace {
     try {
       LA::Matrix matrix(rows);
 
-      succeeded = matrix.getWidth() != 1000 || matrix.getHeight() != 1000;
+      succeeded = matrix.getWidth() == 1000 || matrix.getHeight() == 1000;
     } catch (...) {
       succeeded = false;
     }

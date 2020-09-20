@@ -72,16 +72,16 @@ LinearAlgebra::Matrix& LinearAlgebra::Matrix::operator=(
 
 const LinearAlgebra::OneDArray& LinearAlgebra::Matrix::operator[](
     size_t const rowIndex) const {
-  if (rowIndex < 0 || rowIndex >= this->getHeight()) {
-    throw "Error: invalid access row index.";
+  if (rowIndex >= this->getHeight()) {
+    throw "Error: access row index is passed the row height.";
   }
   return this->rows[rowIndex];
 }
 
 LinearAlgebra::OneDArray& LinearAlgebra::Matrix::operator[](
     size_t const rowIndex) {
-  if (rowIndex < 0 || rowIndex >= this->getHeight()) {
-    throw "Error: invalid access row index.";
+  if (rowIndex >= this->getHeight()) {
+    throw "Error: access row index is passed the row height.";
   }
 
   return this->rows[rowIndex];

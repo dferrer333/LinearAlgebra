@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "include",
+                "include/gtest/include",
                 "src",
                 "${default}"
             ],

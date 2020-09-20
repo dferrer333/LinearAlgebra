@@ -5,3 +5,7 @@ obj/*
 
 bin/*
 !bin/README.md
+
+test/*
+!test/Makefile
+!test/*.test.cpp

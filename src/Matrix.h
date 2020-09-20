@@ -48,8 +48,6 @@ namespace LinearAlgebra {
 
   using MatrixPointer = std::unique_ptr<Matrix>;
 
-  MatrixPointer createMatrixCopyOnHeap(Matrix const &otherMatrix);
-
   MatrixPointer createIdentityMatrix(size_t size);
 
   MatrixPointer createTranslationMatrix(
