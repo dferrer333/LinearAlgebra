@@ -1,12 +1,18 @@
 *.code-workspace
 
-obj/*
-!obj/README.md
+/obj/*
+!/obj/README.md
 
-bin/*
-!bin/README.md
+/bin/*
+!/bin/README.md
 
-test/*
-!test/Makefile
-!test/*.test.cpp
-!test/run_all_tests
+/test/*.o
+/test/*.test
+/test/*.a
+
+/test/lib/*.a
+
+/test/obj/*.o
+
+/test/bin/*
+!/test/bin/README.md
