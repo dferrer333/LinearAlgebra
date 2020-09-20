@@ -43,10 +43,14 @@ namespace LinearAlgebra {
       void ensureMatrixIsUniform() const;
   };
 
+  void ensureMatricesAreCompatible(
+      Matrix const &matrix1, Matrix const &matrix2);
+
   bool operator==(Matrix const &matrix1, Matrix const &matrix2);
   bool operator!=(Matrix const &matrix1, Matrix const &matrix2);
 
   using MatrixPointer = std::unique_ptr<Matrix>;
+
 
   MatrixPointer createIdentityMatrix(size_t size);
 

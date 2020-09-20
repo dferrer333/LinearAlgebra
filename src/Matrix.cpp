@@ -1,13 +1,13 @@
 #include "Matrix.h"
 
 namespace LinearAlgebra {
-  Matrix::Matrix(LinearAlgebra::TwoDArray const &rows)
+  Matrix::Matrix(TwoDArray const &rows)
       : rows(rows) {
     this->ensureMatrixHasRowsAndColumns();
     this->ensureMatrixIsUniform();
   }
 
-  Matrix::Matrix(LinearAlgebra::Matrix const &otherMatrix)
+  Matrix::Matrix(Matrix const &otherMatrix)
       : rows(otherMatrix.rows) {
     this->ensureMatrixHasRowsAndColumns();
     this->ensureMatrixIsUniform();
@@ -22,14 +22,7 @@ namespace LinearAlgebra {
   }
 
   Matrix Matrix::operator+(Matrix const &otherMatrix) const {
-    if (this->getHeight() == 0 || otherMatrix.getHeight() == 0 ||
-        this->getWidth() == 0 || otherMatrix.getWidth() == 0) {
-      throw "Error: matrices must have positive width and height.";
-    }
-    if (this->getWidth() != otherMatrix.getWidth() ||
-        this->getHeight() != otherMatrix.getHeight()) {
-      throw "Error: matrices must have equal heights and widths when adding.";
-    }
+    ensureMatricesAreCompatible(*this, otherMatrix);
 
     TwoDArray summedMatrix;
     OneDArray temporaryRow(otherMatrix.getWidth());
@@ -45,14 +38,7 @@ namespace LinearAlgebra {
   }
 
   Matrix& Matrix::operator+=(Matrix const &otherMatrix) {
-    if (this->getHeight() == 0 || otherMatrix.getHeight() == 0 ||
-        this->getWidth() == 0 || otherMatrix.getWidth() == 0) {
-      throw "Error: matrices must have positive width and height.";
-    }
-    if (this->getWidth() != otherMatrix.getWidth() ||
-        this->getHeight() != otherMatrix.getHeight()) {
-      throw "Error: matrices must have equal heights and widths when adding.";
-    }
+    ensureMatricesAreCompatible(*this, otherMatrix);
 
     for (size_t i = 0; i < otherMatrix.getHeight(); i++) {
       for (size_t j = 0; j < otherMatrix.getWidth(); j++) {
@@ -61,6 +47,18 @@ namespace LinearAlgebra {
     }
 
     return *this;
+  }
+
+  void ensureMatricesAreCompatible(
+      Matrix const &matrix1, Matrix const &matrix2) {
+    if (matrix1.getHeight() == 0 || matrix2.getHeight() == 0 ||
+        matrix1.getWidth() == 0 || matrix2.getWidth() == 0) {
+      throw "Error: matrices must have positive width and height.";
+    }
+    if (matrix1.getWidth() != matrix2.getWidth() ||
+        matrix1.getHeight() != matrix2.getHeight()) {
+      throw "Error: matrices must have equal heights and widths when adding.";
+    }
   }
 
   Matrix& Matrix::operator=(Matrix const &otherMatrix) {
